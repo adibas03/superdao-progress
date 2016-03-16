@@ -1,0 +1,91 @@
+contract profileStorage {
+    
+    struct Profile
+    {
+        address creatorAddress;
+        string name;  // 
+        int dob;  // 
+        bytes32 specialty; //
+        string socialLink;   // 
+        string technicalLink;   // 
+        string professionalLink;   // 
+    }
+    
+    mapping (uint => Profile) profiles;
+    
+    uint profileNo;
+    
+    
+    
+    function profileStorage(){
+        if (profileNo < 1) profileNo = 0;
+    }
+    
+    function getNo() constant returns(uint retVal){
+        return profileNo;
+    }
+    
+    function createProfile(
+        string cname,
+        int cdob,
+        bytes32 cspecialty,
+        string csocialLink,
+        string ctechnicalLink,
+        string cprofessionalLink ) returns(uint retVal) {
+            
+        address creator=msg.sender;
+        profileNo++;
+        profiles[profileNo] = 
+        Profile({
+            creatorAddress: creator,
+            name: cname,
+            dob: cdob,
+            specialty: cspecialty,
+            socialLink: csocialLink,
+            technicalLink: ctechnicalLink,
+            professionalLink: cprofessionalLink});
+            return profileNo;
+    }
+    
+    function getProfile (uint profileNo) returns (
+        string n,
+        int d,
+        bytes32 s,
+        string sL,
+        string tL,
+        string pL
+        ){
+        n = profiles[profileNo].name;
+        d = profiles[profileNo].dob;
+        s = profiles[profileNo].specialty;
+        sL = profiles[profileNo].socialLink;
+        tL = profiles[profileNo].technicalLink;
+        pL = profiles[profileNo].professionalLink;
+    }
+    
+    
+    function updateProfile(
+        uint proFIleNo,
+        string uname,
+        int udob,
+        bytes32 uspecialty,
+        string usocialLink,
+        string utechnicalLink,
+        string uprofessionalLink) returns (bool retVal){
+            
+        address creator = profiles[profileNo].creatorAddress;
+        
+        if(creator == msg.sender){
+            profiles[profileNo].name = uname;
+            profiles[profileNo].dob = udob;
+            profiles[profileNo].specialty = uspecialty;
+            profiles[profileNo].socialLink = usocialLink;
+            profiles[profileNo].technicalLink = utechnicalLink;
+            profiles[profileNo].professionalLink = uprofessionalLink;
+            return true;
+        }
+        else return false;
+    }
+    
+    
+}
