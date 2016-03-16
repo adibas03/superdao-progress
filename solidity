@@ -16,15 +16,32 @@ contract profileStorage {
     uint profileNo;
     
     
-    
+  /**
+   * constructor function. Initialize length of Profiles, if not exists
+   */
     function profileStorage(){
         if (profileNo < 1) profileNo = 0;
     }
     
+    
+/**
+ * Get the present length of Profiles(Contracts)
+ */
     function getNo() constant returns(uint retVal){
         return profileNo;
     }
     
+    
+    
+/**
+ * Create Profile from list of arguments, and returns id after creation.
+ * @param cname Name of Profile owner.
+ * @param cdob Timestamp of the day of birth. Will be used to generate age.
+ * @param cspecialty Specialtyo of Profile owner.
+ * @param csocialLink Social link of Profile owner
+ * @param ctechnicalLink Technical Link for Profile owner.
+ * @param cprofessionalLink Professional Link of Profile owner
+ */
     function createProfile(
         string cname,
         int cdob,
@@ -47,6 +64,11 @@ contract profileStorage {
             return profileNo;
     }
     
+    
+ /**
+ * Fetch profile by ID/No returned when created
+ * @param profileNo uint
+ */
     function getProfile (uint profileNo) returns (
         string n,
         int d,
@@ -64,6 +86,9 @@ contract profileStorage {
     }
     
     
+/**
+ * Update Profile.( only if same address as creator)
+ */
     function updateProfile(
         uint proFIleNo,
         string uname,
