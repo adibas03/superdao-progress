@@ -15,14 +15,7 @@ var profilestorage = profilestorageContract.new(
       if (typeof contract.address != 'undefined') {
         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
           storage = contract.address;
-        //getProfile();
-
-        var object = {
-          uname:'user',udob:65465164,uspecialty:'Dapps',
-          usocialLink:'http://twitter.com',utechnicalLink:'http@//github',
-          uprofessionalLink:'http://linkedin'};
-        createProfileContract(object);
-        //console.log(contract.getProfile.call(1));
+        
       }
     })
 
